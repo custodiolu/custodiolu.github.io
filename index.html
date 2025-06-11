@@ -55,8 +55,9 @@
                         <br><br>Somos o futuro da sua startup!
                     </p>
                 </div>
-                <div class="home-img">
-                    <img src="./images/QUEM SOMOS.jpg" alt="imagem Mulher UNITECH">
+                    <div class="home-img">
+                        <img src="./images/QUEM SOMOS.jpg" alt="imagem Mulher UNITECH">
+                    </div>
                 </div>
         </section>
 
@@ -127,19 +128,89 @@
                 </div>
             </div>
             <div class="equipe">
-                <li>CEO - LUCAS MARTINIANO</li>
-                <li>CONSULTOR - BRYAN ERNESTO</li>
+                <li>CEO - BRYAN ERNESTO</li>
+                <li>CONSULTOR - LUCAS MARTINIANO</li>
                 <li>TÉCNICO FIELD - EWERTON MOREIRA</li>
                 <li>ANALISTA DE CLOUD - LUCAS CUSTÓDIO</li>
                 <li>SUPORTE REMOTO - LEANDRO CHAVES</li>
                 <li>ANALISTA DE INFRAESTRUTURA - JONATAN SILVA</li>
+                <li>ANALISTA DE CYBERSECURITY - GABRIEL CAMPOS</li>
             </div>
         </section>
     </main>
 
-    <div id="noite">
-        <button type="button" onclick="modonoturno()" id="botão">Modo Noturno</button>
+       
+
+<!-- Modal de cadastro -->
+<div class="modal" id="cadastroModal" tabindex="-1" style="display:none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cadastro de Empresa</h5>
+        <button type="button" class="btn-fechar-modal" onclick="fecharCadastro()">×</button>
+      </div>
+      <div class="modal-body">
+        <div id="formularioEmpresa">
+          <input class="form-control mb-2" type="text" id="cnpj" placeholder="CNPJ">
+          <input class="form-control mb-2" type="text" id="nomeEmpresa" placeholder="Nome da Empresa">
+          <input class="form-control mb-2" type="text" id="ramo" placeholder="Ramo de Atuação">
+          <input class="form-control mb-2" type="text" id="localidade" placeholder="Localidade">
+        </div>
+
+        <div id="resumoEmpresa" style="display:none;">
+          <h6>Confirme os dados:</h6>
+          <ul>
+            <li><strong>CNPJ:</strong> <span id="resumoCnpj"></span></li>
+            <li><strong>Empresa:</strong> <span id="resumoNome"></span></li>
+            <li><strong>Ramo:</strong> <span id="resumoRamo"></span></li>
+            <li><strong>Localidade:</strong> <span id="resumoLocalidade"></span></li>
+          </ul>
+        </div>
+
+        <div id="mensagemFinal" style="display:none;" class="text-success fw-bold"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="fecharCadastro()">Cancelar</button>
+        <button class="btn btn-primary" id="btnProximo" onclick="validarFormulario()">Próximo</button>
+        <button class="btn btn-success" id="btnConfirmar" onclick="confirmarCadastro()" style="display:none;">Confirmar</button>
+        <button class="btn btn-warning" id="btnEditar" onclick="editarCadastro()" style="display:none;">Editar</button>
+      </div>
     </div>
+  </div>
+</div>
+
+
+    <div class="chatbot">
+    <div class="chatbot-header">
+        <h4>Atendente Virtual</h4>
+        <button onclick="toggleChat()">_</button>
+    </div>
+    <div class="chatbot-body" id="chat-body">
+        <div class="bot-message"></div>
+    </div>
+    <div class="chatbot-input">
+    <input type="text" id="user-input" placeholder="Digite sua mensagem...">
+    <button onclick="sendMessage()">Enviar</button>
+</div>
+
+    </div>
+
+    <button class="chatbot-toggle" onclick="toggleChat()">💬</button>
+
+    <div class="modal" id="resumoModal" tabindex="-1" style="display:none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <h3>Resumo da Conversa</h3>
+      <div id="resumoTexto" style="max-height: 300px; overflow-y: auto;"></div>
+      <button class="btn btn-secondary" onclick="fecharModal()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    
 
     <footer>
         <span class="autorais">
