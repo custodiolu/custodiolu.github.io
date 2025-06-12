@@ -63,6 +63,49 @@ function sendMessage() {
         chatBody.appendChild(botMessage);
         chatBody.scrollTop = chatBody.scrollHeight;
 
+        document.querySelectorAll('.chat-option').forEach(button => {
+    button.addEventListener('click', () => {
+        const service = button.innerText;
+        const chatBody = document.getElementById('chat-body');
+
+        const botResponse = document.createElement('div');
+        botResponse.className = 'bot-message';
+        botResponse.innerHTML = `🔹 <strong>${service}</strong><br>`;
+
+        switch (service) {
+            case 'ERP Agrícola':
+                botResponse.innerHTML += 'Soluções ERP focadas na gestão de produção, estoque, financeiro e operações agrícolas.';
+                break;
+            case 'Suporte Técnico 24h':
+                botResponse.innerHTML += 'Nossa equipe está disponível 24 horas para resolver problemas técnicos e garantir estabilidade.';
+                break;
+            case 'Cloud e Infraestrutura':
+                botResponse.innerHTML += 'Implantação de servidores em nuvem, backups automatizados e escalabilidade segura.';
+                break;
+            case 'Segurança de Dados':
+                botResponse.innerHTML += 'Implementamos criptografia, controle de acesso e monitoramento de vulnerabilidades.';
+                break;
+            case 'Integração com IoT':
+                botResponse.innerHTML += 'Conectamos sensores do campo com sistemas de análise e gestão em tempo real.';
+                break;
+            case 'Transformação Digital':
+                botResponse.innerHTML += 'Ajudamos sua empresa a modernizar processos com tecnologias ágeis e eficientes.';
+                break;
+            case 'Automatização de Processos':
+                botResponse.innerHTML += 'Reduza tarefas manuais com soluções automatizadas sob medida para o agro.';
+                break;
+            case 'Manutenção Preventiva':
+                botResponse.innerHTML += 'Monitoramento contínuo e correções programadas para evitar falhas críticas.';
+                break;
+            default:
+                botResponse.innerHTML += 'Esse serviço ainda está sendo detalhado.';
+        }
+
+        chatBody.appendChild(botResponse);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    });
+});
+
         
         const cadastroKeywords = ['cadastro', 'cadastrar', 'quero me cadastrar'];
         if (cadastroKeywords.some(keyword => input.includes(keyword))) {
@@ -73,6 +116,52 @@ function sendMessage() {
 
     inputField.value = '';
     verificarFimDeConversa(input);
+
+    setTimeout(() => {
+    document.querySelectorAll('.chat-option').forEach(button => {
+        button.addEventListener('click', () => {
+            const service = button.innerText;
+            const chatBody = document.getElementById('chat-body');
+
+            const botResponse = document.createElement('div');
+            botResponse.className = 'bot-message';
+            botResponse.innerHTML = `Ótimo! Aqui está um resumo sobre <strong>${service}</strong>.<br>`;
+
+            switch (service) {
+                case 'ERP Agrícola':
+                    botResponse.innerHTML += 'Soluções ERP focadas na gestão de produção, estoque, financeiro e operações agrícolas.';
+                    break;
+                case 'Suporte Técnico 24h':
+                    botResponse.innerHTML += 'Nossa equipe está disponível 24 horas para resolver problemas técnicos e garantir estabilidade.';
+                    break;
+                case 'Cloud e Infraestrutura':
+                    botResponse.innerHTML += 'Implantação de servidores em nuvem, backups automatizados e escalabilidade segura.';
+                    break;
+                case 'Segurança de Dados':
+                    botResponse.innerHTML += 'Implementamos criptografia, controle de acesso e monitoramento de vulnerabilidades.';
+                    break;
+                case 'Integração com IoT':
+                    botResponse.innerHTML += 'Conectamos sensores do campo com sistemas de análise e gestão em tempo real.';
+                    break;
+                case 'Transformação Digital':
+                    botResponse.innerHTML += 'Ajudamos sua empresa a modernizar processos com tecnologias ágeis e eficientes.';
+                    break;
+                case 'Automatização de Processos':
+                    botResponse.innerHTML += 'Reduza tarefas manuais com soluções automatizadas sob medida para o agro.';
+                    break;
+                case 'Manutenção Preventiva':
+                    botResponse.innerHTML += 'Monitoramento contínuo e correções programadas para evitar falhas críticas.';
+                    break;
+                default:
+                    botResponse.innerHTML += 'Esse serviço ainda está sendo detalhado.';
+            }
+
+            chatBody.appendChild(botResponse);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        });
+    });
+}, 100); // pequeno delay para garantir que os botões existam no DOM
+
 }
 
 
@@ -93,13 +182,23 @@ function getBotResponse(input) {
                 'Seja bem-vindo ao nosso site!'
             ],
         },
-        {
-            palavras: ['servico', 'servicos', 'o que voces fazem', 'oferecem'],
-            respostas: [
-                'Oferecemos soluções em TI, cloud, suporte, ERP, e muito mais.',
-                'Temos serviços de implantação de sistemas, suporte técnico, análise de dados e nuvem.',
-            ],
-        },
+       {
+    palavras: ['servico', 'servicos', 'o que voces fazem', 'oferecem'],
+    respostas: [
+        'Oferecemos uma variedade de serviços especializados para startups do agronegócio:<br><br>' +
+        '<button class="chat-option">ERP Agrícola</button> ' +
+        '<button class="chat-option">Suporte Técnico 24h</button> ' +
+        '<button class="chat-option">Cloud e Infraestrutura</button> ' +
+        '<button class="chat-option">Segurança de Dados</button> ' +
+        '<button class="chat-option">Integração com IoT</button> ' +
+        '<button class="chat-option">Transformação Digital</button> ' +
+        '<button class="chat-option">Automatização de Processos</button> ' +
+        '<button class="chat-option">Manutenção Preventiva</button><br><br>' +
+        'Clique em um serviço para saber mais ou me diga o que você está procurando! 😉'
+    ],
+},
+
+
         {
             palavras: ['contato', 'telefone', 'email', 'whatsapp'],
             respostas: [
@@ -109,8 +208,7 @@ function getBotResponse(input) {
         {
             palavras: ['suporte', 'ajuda', 'problema', 'erro'],
             respostas: [
-                'Nosso suporte funciona 24h. Por favor, descreva seu problema.',
-                'Conte com a gente! Estamos disponíveis para suporte o tempo todo.'
+                'Nosso suporte funciona 24h. Entre em contato pelo nosso e-mail ou WhatsApp.'
             ],
         },
         {
@@ -132,7 +230,14 @@ function getBotResponse(input) {
             respostas: [
                 'Somos especialistas em soluções de TI voltadas para o setor agro e startups! 🌱<br>Oferecemos: ERPs agrícolas, automação de processos e integração com IoT.'
             ],
-        }
+        },
+        {
+    palavras: ['duvidas', 'dúvidas', 'perguntas frequentes', 'faq'],
+    respostas: [
+        'Você pode perguntar sobre nossos <strong>serviços</strong>, formas de <strong>cadastro</strong>, <strong>atendimento</strong> ou qualquer outro assunto relacionado à tecnologia para o agro. 😉'
+    ],
+},
+
     ];
 
     let respostas = [];
@@ -186,11 +291,47 @@ function fecharModal() {
 
 window.onload = () => {
     const chatBody = document.getElementById('chat-body');
+
     const botMessage = document.createElement('div');
     botMessage.className = 'bot-message';
-    botMessage.innerHTML = 'Olá! 👋 Sou a assistente virtual da UNITECH. Como posso ajudar?';
+    botMessage.innerHTML = `
+        <p>Olá! 👋 Sou a assistente virtual da UNITECH. Em que posso te ajudar?</p>
+        <div class="menu-interativo">
+            <div class="menu-item" data-option="cadastro">
+                📝<br><strong>Cadastro</strong>
+            </div>
+            <div class="menu-item" data-option="servicos">
+                🛠️<br><strong>Serviços</strong>
+            </div>
+            <div class="menu-item" data-option="contato">
+                📞<br><strong>Contato</strong>
+            </div>
+            <div class="menu-item" data-option="suporte">
+                🆘<br><strong>Suporte</strong>
+            </div>
+            <div class="menu-item" data-option="duvidas">
+                ❓<br><strong>Dúvidas</strong>
+            </div>
+        </div>
+    `;
+
     chatBody.appendChild(botMessage);
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    // Eventos de clique para cada item do menu
+    setTimeout(() => {
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const opcao = item.dataset.option;
+                const inputField = document.getElementById('user-input');
+                inputField.value = opcao;
+                sendMessage();
+            });
+        });
+    }, 100); // delay leve para garantir renderização
 };
+
+
 
  function abrirModalCadastro() {
             document.getElementById('cadastroModal').classList.remove('hidden');
